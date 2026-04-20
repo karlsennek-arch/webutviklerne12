@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sammenligning — Kova vs Boost.ai, Intercom, Chatbot Norge</title>
+<meta name="description" content="Ærlig sammenligning av Kova mot konkurrenter. Pris, norsk-spesialisering, implementeringstid, og når du bør velge noen andre.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%235A6B1A'/%3E%3Cpath d='M32 28 L32 72 M32 50 L58 28 M32 50 L62 72' stroke='%23FAFAF7' stroke-width='8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<style>*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAFAF7;--bg-tint:#F5F4EE;--bg-warm:#F0EEE5;
+  --surface:#F0EFEB;--surface-2:#EAE8E0;
+  --ink:#1A1A17;
+  --ink-2:rgba(26,26,23,.72);--ink-3:rgba(26,26,23,.48);
+  --ink-4:rgba(26,26,23,.26);--ink-5:rgba(26,26,23,.12);
+  --line:rgba(26,26,23,.07);--line-2:rgba(26,26,23,.11);--line-3:rgba(26,26,23,.18);
+  --olive:#5A6B1A;--olive-2:#6B7E22;--olive-3:#7E9428;--olive-4:#93AC2E;
+  --olive-glow:rgba(90,107,26,.08);--olive-glow-2:rgba(90,107,26,.16);
+  --green:#4A7A1A;--amber:#9A7B2E;--red:#8B2E2E;
+  --font:'Instrument Sans',system-ui,-apple-system,sans-serif;
+  --serif:'Newsreader','Instrument Serif',Georgia,serif;
+  --mono:'JetBrains Mono',monospace;
+  --ease:cubic-bezier(.4,0,.2,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --r-xs:8px;--r-sm:12px;--r:16px;--r-lg:22px;--r-xl:32px;--r-2xl:40px;--r-full:999px;
+  --shadow-sm:0 1px 2px rgba(26,26,23,.04);
+  --shadow:0 4px 20px rgba(26,26,23,.06);
+  --shadow-md:0 12px 40px rgba(26,26,23,.08);
+  --shadow-lg:0 24px 60px rgba(26,26,23,.12);
+  --shadow-xl:0 40px 100px rgba(26,26,23,.15);
+  --shadow-glow:0 8px 40px rgba(90,107,26,.25);
+  --max-w:1200px;--max-w-narrow:960px;--max-w-text:680px;--gutter:32px;
+  --nav-h:72px;--banner-h:44px;
+}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + var(--banner-h) + 20px)}
+body{background:var(--bg);color:var(--ink-2);font-family:var(--font);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;font-feature-settings:"ss01","cv11"}
+::selection{background:var(--olive);color:var(--bg)}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+img,svg{display:block;max-width:100%}
+input,textarea,select{font-family:inherit;color:inherit}
+
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");opacity:.025;pointer-events:none;z-index:9999;mix-blend-mode:multiply}
+
+/* Scroll progress */
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--olive),var(--olive-3));z-index:1002;width:0%;transition:width .1s linear}
+
+/* Banner */
+body{padding-top:var(--banner-h)}
+.launch-banner{position:fixed;top:0;left:0;right:0;z-index:1001;height:var(--banner-h);background:linear-gradient(90deg,#1A1A17 0%,#2A2A25 50%,#1A1A17 100%);color:var(--bg);display:flex;align-items:center;justify-content:center;gap:14px;padding:0 24px;font-size:12.5px;font-weight:500;overflow:hidden}
+.launch-banner::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(250,250,247,.08) 50%,transparent);animation:bShine 8s linear infinite}
+@keyframes bShine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.lb-badge{display:inline-flex;align-items:center;padding:3px 9px;background:var(--olive);color:var(--bg);border-radius:var(--r-full);font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;position:relative;z-index:1}
+.lb-text{position:relative;z-index:1;color:rgba(250,250,247,.9)}
+.lb-link{position:relative;z-index:1;display:inline-flex;align-items:center;gap:5px;color:var(--olive-3);font-weight:600;transition:all .3s var(--ease-out)}
+.lb-link:hover{color:var(--olive-4);gap:8px}
+
+/* Nav */
+.nav{position:fixed;top:var(--banner-h);left:0;right:0;z-index:1000;height:var(--nav-h);background:rgba(250,250,247,.72);backdrop-filter:blur(28px) saturate(1.5);-webkit-backdrop-filter:blur(28px) saturate(1.5);border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
+.nav.scrolled{background:rgba(250,250,247,.88);border-bottom-color:var(--line-2)}
+.nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--gutter);height:100%;display:flex;align-items:center;justify-content:space-between;gap:40px}
+.logo{display:inline-flex;align-items:center;gap:11px}
+.logo-mark{position:relative;width:36px;height:36px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.3),transparent 50%),linear-gradient(135deg,var(--olive),#3D4A12);display:flex;align-items:center;justify-content:center;transition:transform .5s var(--ease-spring);overflow:hidden;box-shadow:0 4px 12px rgba(90,107,26,.2),inset 0 -1px 0 rgba(0,0,0,.15)}
+.logo-mark::after{content:'';position:absolute;inset:0;background:conic-gradient(from 0deg,transparent,rgba(255,255,255,.15),transparent 30%);animation:lRot 6s linear infinite}
+@keyframes lRot{to{transform:rotate(360deg)}}
+.logo:hover .logo-mark{transform:scale(1.08) rotate(-5deg)}
+.logo-mark svg{width:18px;height:18px;position:relative;z-index:1}
+.logo-text{display:flex;flex-direction:column;gap:1px;line-height:1}
+.logo-name{font-weight:700;font-size:16px;color:var(--ink);letter-spacing:-.4px}
+.logo-by{font-size:9.5px;color:var(--ink-3);font-weight:500;letter-spacing:.6px;text-transform:uppercase}
+
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-link{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:500;color:var(--ink-2);padding:8px 14px;border-radius:var(--r-sm);transition:all .3s var(--ease)}
+.nav-link:hover{color:var(--ink);background:var(--surface)}
+.nav-link.active{color:var(--olive);background:var(--olive-glow)}
+.nav-link svg{width:11px;height:11px;opacity:.5}
+
+.nav-cta{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:var(--r-sm);background:var(--ink);color:var(--bg);font-size:13px;font-weight:600;transition:all .35s var(--ease);letter-spacing:-.1px;position:relative;overflow:hidden}
+.nav-cta::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--olive),var(--olive-2));transform:translateY(100%);transition:transform .4s var(--ease-out)}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:var(--shadow-glow)}
+.nav-cta:hover::before{transform:translateY(0)}
+.nav-cta > *{position:relative;z-index:1}
+.nav-cta svg{width:12px;height:12px;transition:transform .3s var(--ease-out)}
+.nav-cta:hover svg{transform:translateX(3px)}
+
+.hamburger{display:none;flex-direction:column;gap:5px;padding:10px;margin-right:-10px}
+.hamburger span{width:20px;height:2px;background:var(--ink);border-radius:2px;transition:all .4s var(--ease-spring)}
+.mobile-menu{display:none;position:fixed;top:calc(var(--nav-h) + var(--banner-h));left:0;right:0;bottom:0;background:rgba(250,250,247,.97);backdrop-filter:blur(32px);z-index:999;padding:32px;flex-direction:column}
+.mobile-menu.open{display:flex}
+.mobile-menu a{display:block;padding:18px 0;font-size:20px;font-weight:600;color:var(--ink-2);border-bottom:1px solid var(--line)}
+.mobile-menu a:last-child{color:var(--olive)}
+
+/* Breadcrumbs */
+.breadcrumbs{max-width:var(--max-w);margin:0 auto;padding:calc(var(--nav-h) + 40px) var(--gutter) 0;font-size:12.5px;color:var(--ink-3)}
+.breadcrumbs a{transition:color .3s}
+.breadcrumbs a:hover{color:var(--olive)}
+.breadcrumbs span{margin:0 10px;color:var(--ink-4)}
+
+/* Page header */
+.page-header{padding:40px var(--gutter) 100px;text-align:center;max-width:var(--max-w);margin:0 auto;position:relative}
+.page-header::after{content:'';position:absolute;bottom:0;left:25%;right:25%;height:1px;background:linear-gradient(90deg,transparent,var(--line-2),transparent)}
+.page-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 10px;background:var(--bg);border:1px solid var(--line-2);border-radius:var(--r-full);font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-2);margin-bottom:28px;box-shadow:var(--shadow-sm)}
+.page-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--olive-3);box-shadow:0 0 6px var(--olive-3)}
+.page-header h1{font-size:clamp(44px,6vw,76px);font-weight:600;color:var(--ink);letter-spacing:-2.8px;line-height:1.02;margin-bottom:24px;max-width:860px;margin-left:auto;margin-right:auto}
+.page-header h1 em{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--olive);letter-spacing:-2.5px}
+.page-header > p{font-size:18px;color:var(--ink-2);max-width:620px;margin:0 auto;line-height:1.65}
+
+/* Section base */
+.section{padding:140px var(--gutter);max-width:var(--max-w);margin:0 auto}
+.section-head{text-align:center;margin-bottom:72px;max-width:720px;margin-left:auto;margin-right:auto}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 10px;background:var(--bg);border:1px solid var(--line-2);border-radius:var(--r-full);font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-2);margin-bottom:24px;box-shadow:var(--shadow-sm)}
+.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--olive-3);box-shadow:0 0 6px var(--olive-3)}
+.section h2{font-size:clamp(36px,4.8vw,58px);font-weight:600;color:var(--ink);letter-spacing:-2.2px;line-height:1.02;margin-bottom:20px}
+.section h2 em{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--olive);letter-spacing:-2px}
+.section-head > p{font-size:17px;color:var(--ink-2);line-height:1.65;max-width:560px;margin:0 auto}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:16px 28px;border-radius:var(--r-sm);font-size:14.5px;font-weight:600;transition:all .35s var(--ease);letter-spacing:-.1px;position:relative;overflow:hidden;cursor:pointer;font-family:var(--font)}
+.btn-primary{background:var(--ink);color:var(--bg);box-shadow:var(--shadow-sm)}
+.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--olive),var(--olive-2) 60%,#3D4A12);opacity:0;transition:opacity .4s var(--ease-out)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-glow)}
+.btn-primary:hover::before{opacity:1}
+.btn-primary > *{position:relative;z-index:1}
+.btn-primary svg{width:14px;height:14px;transition:transform .3s var(--ease-out)}
+.btn-primary:hover svg{transform:translateX(4px)}
+.btn-ghost{background:transparent;color:var(--ink-2);border:1px solid var(--line-2)}
+.btn-ghost:hover{background:var(--bg);color:var(--ink);border-color:var(--line-3);transform:translateY(-1px)}
+
+/* Final CTA */
+.final-cta{max-width:var(--max-w);margin:0 auto 140px;padding:0 var(--gutter)}
+.final-cta-inner{position:relative;padding:96px 64px;background:var(--ink);color:var(--bg);border-radius:var(--r-2xl);text-align:center;overflow:hidden}
+.fc-orb{position:absolute;width:600px;height:600px;border-radius:50%;filter:blur(120px);pointer-events:none;opacity:.35}
+.fc-orb-1{top:-200px;right:-100px;background:radial-gradient(circle,var(--olive-3),transparent 60%)}
+.fc-orb-2{bottom:-200px;left:-100px;background:radial-gradient(circle,rgba(139,154,58,.4),transparent 60%)}
+.final-cta-inner h2{position:relative;z-index:1;font-size:clamp(36px,5vw,56px);font-weight:600;color:var(--bg);letter-spacing:-2px;line-height:1.05;margin-bottom:24px;max-width:640px;margin-left:auto;margin-right:auto}
+.final-cta-inner h2 em{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--olive-3)}
+.final-cta-inner p{position:relative;z-index:1;font-size:17px;color:rgba(250,250,247,.7);line-height:1.65;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto}
+.final-cta-actions{position:relative;z-index:1;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.final-cta-inner .btn-primary{background:var(--bg);color:var(--ink)}
+.final-cta-inner .btn-primary::before{background:linear-gradient(135deg,var(--olive-3),var(--olive))}
+.final-cta-inner .btn-primary:hover{color:var(--bg)}
+.final-cta-inner .btn-ghost{color:var(--bg);border-color:rgba(255,255,255,.2)}
+.final-cta-inner .btn-ghost:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:var(--bg)}
+
+/* Footer */
+footer{background:var(--ink);color:var(--bg);padding:100px var(--gutter) 40px;position:relative;overflow:hidden}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--olive-3),transparent)}
+.footer-top{max-width:var(--max-w);margin:0 auto 60px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:60px}
+.footer-brand{max-width:320px}
+.footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.footer-logo .logo-mark{background:linear-gradient(135deg,var(--olive-3),var(--olive))}
+.footer-tagline{font-size:14px;color:rgba(250,250,247,.55);line-height:1.65;margin-bottom:20px}
+.footer-byline{font-size:12px;color:rgba(250,250,247,.35)}
+.footer-col h5{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(250,250,247,.55);margin-bottom:18px}
+.footer-col a{display:block;font-size:13.5px;color:rgba(250,250,247,.7);padding:6px 0;transition:color .3s}
+.footer-col a:hover{color:var(--bg)}
+.footer-bottom{max-width:var(--max-w);margin:0 auto;padding-top:40px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;font-size:12px;color:rgba(250,250,247,.4)}
+.footer-badges{display:flex;gap:10px;flex-wrap:wrap}
+.footer-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border:1px solid rgba(255,255,255,.1);border-radius:var(--r-full);font-size:11px;color:rgba(250,250,247,.5)}
+.footer-badge svg{width:10px;height:10px;color:var(--olive-3)}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* Responsive */
+@media (max-width:820px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .section{padding:80px var(--gutter)}
+  .final-cta{margin-bottom:80px}
+  .final-cta-inner{padding:60px 32px}
+  .page-header{padding:20px var(--gutter) 60px}
+  .footer-top{grid-template-columns:1fr 1fr;gap:40px}
+  .launch-banner{padding:0 16px;gap:10px}
+  .lb-text{font-size:11.5px}
+}
+@media (max-width:560px){
+  :root{--gutter:20px}
+  .footer-top{grid-template-columns:1fr}
+}
+
+.compare-wrap{max-width:var(--max-w);margin:40px auto 0;padding:0 var(--gutter)}
+.compare-table{background:#fff;border:1px solid var(--line-2);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow)}
+.compare-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;font-size:13.5px}
+.compare-grid > div{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center}
+.compare-grid .ch{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:var(--surface);color:var(--ink);padding:16px 20px}
+.compare-grid .ch.pri{background:var(--ink);color:var(--bg)}
+.compare-grid .crow{border-right:1px solid var(--line)}
+.compare-grid > div:nth-child(4n){border-right:none}
+.compare-grid .lbl{font-weight:600;color:var(--ink)}
+.compare-grid .highlight{background:var(--olive-glow)}
+.compare-yes{color:var(--olive);font-weight:700;font-size:16px}
+.compare-no{color:var(--ink-4);font-weight:700;font-size:16px}
+.compare-note{font-size:12px;color:var(--ink-3);line-height:1.4}
+
+.decision{max-width:820px;margin:140px auto;padding:0 var(--gutter)}
+.dg-card{display:flex;gap:24px;padding:32px;background:#fff;border:1px solid var(--line-2);border-radius:var(--r-lg);margin-bottom:16px;transition:all .3s var(--ease-out);align-items:flex-start}
+.dg-card:hover{border-color:var(--line-3);transform:translateY(-3px);box-shadow:var(--shadow)}
+.dg-num{font-family:var(--serif);font-style:italic;font-size:44px;font-weight:500;color:var(--olive);line-height:1;flex-shrink:0;letter-spacing:-1.5px;min-width:60px}
+.dg-body h4{font-size:18px;font-weight:700;color:var(--ink);margin-bottom:8px;letter-spacing:-.3px}
+.dg-body p{font-size:14.5px;color:var(--ink-2);line-height:1.65}
+.dg-conclusion{max-width:640px;margin:40px auto 0;padding:40px;background:var(--bg-tint);border:1px solid var(--line);border-radius:var(--r-lg);text-align:center}
+.dg-conclusion h4{font-size:22px;font-weight:700;color:var(--ink);margin-bottom:14px;letter-spacing:-.4px}
+.dg-conclusion p{font-size:14.5px;color:var(--ink-2);line-height:1.7;margin-bottom:16px}
+.dg-conclusion a{color:var(--olive);font-weight:700;border-bottom:1px solid currentColor}
+
+.when-not{max-width:var(--max-w);margin:0 auto 140px;padding:0 var(--gutter)}
+.wn-inner{padding:56px 48px;background:var(--ink);color:var(--bg);border-radius:var(--r-2xl);position:relative;overflow:hidden}
+.wn-inner::before{content:'';position:absolute;top:-50%;right:-10%;width:50%;height:200%;background:radial-gradient(ellipse,rgba(154,123,46,.15),transparent 60%);filter:blur(60px);pointer-events:none}
+.wn-title{font-size:30px;font-weight:600;margin-bottom:14px;letter-spacing:-1px;position:relative;z-index:1;max-width:580px}
+.wn-title em{font-family:var(--serif);font-style:italic;color:var(--amber)}
+.wn-inner > p{font-size:15.5px;color:rgba(250,250,247,.65);line-height:1.7;margin-bottom:28px;max-width:640px;position:relative;z-index:1}
+.wn-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative;z-index:1}
+.wn-list li{padding:20px 22px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-sm);font-size:13.5px;color:rgba(250,250,247,.75);line-height:1.6}
+.wn-list li strong{color:var(--bg);display:block;margin-bottom:5px;font-size:14px;font-weight:600}
+
+@media (max-width:820px){
+  .compare-grid{grid-template-columns:1fr;font-size:13px}
+  .compare-grid > div{padding:12px 18px;border-right:none}
+  .wn-list{grid-template-columns:1fr}
+  .wn-inner{padding:40px 28px}
+  .decision{padding:0 var(--gutter);margin:80px auto}
+  .when-not{margin:0 auto 80px}
+}
+</style>
+</head>
+<body><div class="scroll-progress" id="scrollProgress"></div>
+<div class="launch-banner">
+  <span class="lb-badge">Nyhet</span>
+  <span class="lb-text">Første 10 klinikker får 50 % rabatt livet ut</span>
+  <a href="priser.html" class="lb-link">
+    Se pakker
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+  </a>
+</div>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M8 6 L8 18 M8 12 L14 6 M8 12 L15 18" stroke="#FAFAF7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      </div>
+      <div class="logo-text">
+        <div class="logo-name">Kova</div>
+        <div class="logo-by">av Webutviklerne</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="for-klinikker.html" class="nav-link">For klinikker</a>
+      <a href="priser.html" class="nav-link">Priser</a>
+      <a href="case-studies.html" class="nav-link">Kunder</a>
+      <a href="sikkerhet.html" class="nav-link">Sikkerhet</a>
+      <a href="sammenligning.html" class="nav-link active">Sammenligning</a>
+    </div>
+    <a href="index.html#demo" class="nav-cta">
+      <span>Bygg gratis demo</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+    <button class="hamburger" id="hb"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mm">
+  <a href="for-klinikker.html">For klinikker</a>
+  <a href="priser.html">Priser</a>
+  <a href="case-studies.html">Kunder</a>
+  <a href="sikkerhet.html">Sikkerhet</a>
+  <a href="sammenligning.html">Sammenligning</a>
+  <a href="index.html#demo">Bygg gratis demo →</a>
+</div>
+
+<div class="breadcrumbs"><a href="index.html">Hjem</a> <span>/</span> Sammenligning</div>
+
+<section class="page-header">
+  <div class="page-eyebrow">Ærlig sammenligning</div>
+  <h1>Kova er <em>ikke</em> for alle.<br>Her er når du skal — og ikke — velge oss.</h1>
+  <p>I stedet for å late som om vi er best i alt, viser vi deg forskjellene mellom Kova, Boost.ai, Intercom og Chatbot Norge. Og hvem som passer best for hvem.</p>
+</section>
+
+<div class="compare-wrap reveal">
+  <div class="compare-table">
+    <div class="compare-grid">
+      <div class="ch lbl">Funksjon</div>
+      <div class="ch pri">Kova</div>
+      <div class="ch">Boost.ai</div>
+      <div class="ch">Intercom</div>
+      <div class="ch">Chatbot Norge</div>
+      <div class="crow lbl highlight">Pris (start)</div><div class="crow highlight"><strong>fra 490 kr/mnd</strong></div><div class="crow highlight">Enterprise (10k+)</div><div class="crow highlight">fra 880 kr/mnd</div><div class="highlight">fra 690 kr/mnd</div><div class="crow lbl">Spesialisert for klinikker</div><div class="crow"><span class="compare-yes">✓</span></div><div class="crow"><span class="compare-no">—</span></div><div class="crow"><span class="compare-no">—</span></div><div class=" "><span class="compare-note">Generell</span></div><div class="crow lbl">Norsk språk &amp; dialekter</div><div class="crow"><span class="compare-note">Bokmål, nynorsk, dialekter</span></div><div class="crow"><span class="compare-note">Bokmål</span></div><div class="crow"><span class="compare-note">AI-oversatt</span></div><div class=" "><span class="compare-note">Bokmål</span></div><div class="crow lbl highlight">HELFO-forståelse</div><div class="crow highlight"><span class="compare-yes">✓</span></div><div class="crow highlight"><span class="compare-note">Kan trenes</span></div><div class="crow highlight"><span class="compare-no">—</span></div><div class="highlight"><span class="compare-no">—</span></div><div class="crow lbl">Dentica / Opus integrasjon</div><div class="crow"><span class="compare-yes">✓</span></div><div class="crow"><span class="compare-note">På forespørsel</span></div><div class="crow"><span class="compare-no">—</span></div><div class=" "><span class="compare-no">—</span></div><div class="crow lbl highlight">Oppe på 24 timer</div><div class="crow highlight"><span class="compare-yes">✓</span></div><div class="crow highlight"><span class="compare-note">3–6 mnd</span></div><div class="crow highlight"><span class="compare-yes">✓</span></div><div class="highlight"><span class="compare-note">1 uke</span></div><div class="crow lbl">Data i EU</div><div class="crow"><span class="compare-yes">✓</span></div><div class="crow"><span class="compare-yes">✓</span></div><div class="crow"><span class="compare-note">Kan velges</span></div><div class=" "><span class="compare-yes">✓</span></div><div class="crow lbl">Personvernombud-støtte</div><div class="crow"><span class="compare-yes">✓</span></div><div class="crow"><span class="compare-yes">✓</span></div><div class="crow"><span class="compare-note">Enterprise</span></div><div class=" "><span class="compare-no">—</span></div><div class="crow lbl highlight">Ingen bindingstid</div><div class="crow highlight"><span class="compare-yes">✓</span></div><div class="crow highlight"><span class="compare-no">—</span></div><div class="crow highlight"><span class="compare-note">Årlig</span></div><div class="highlight"><span class="compare-note">6 mnd</span></div><div class="crow lbl">Norsk support</div><div class="crow"><span class="compare-yes">✓</span></div><div class="crow"><span class="compare-yes">✓</span></div><div class="crow"><span class="compare-no">—</span></div><div class=" "><span class="compare-yes">✓</span></div><div class="crow lbl">Direkte til grunnlegger</div><div class="crow"><span class="compare-yes">✓</span></div><div class="crow"><span class="compare-no">—</span></div><div class="crow"><span class="compare-no">—</span></div><div class=" "><span class="compare-note">Konsulent</span></div><div class="crow lbl highlight">Live-chat fallback</div><div class="crow highlight"><span class="compare-yes">✓</span></div><div class="crow highlight"><span class="compare-yes">✓</span></div><div class="crow highlight"><span class="compare-yes">✓</span></div><div class="highlight"><span class="compare-yes">✓</span></div><div class="crow lbl">Booking innebygd</div><div class="crow"><span class="compare-yes">✓</span></div><div class="crow"><span class="compare-note">Custom</span></div><div class="crow"><span class="compare-no">—</span></div><div class=" "><span class="compare-note">Custom</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="decision">
+  <div class="section-head reveal">
+    <div class="eyebrow"><span class="eyebrow-dot"></span>Rask beslutningsguide</div>
+    <h2>Svar på disse <em>fire spørsmålene</em> — så vet du.</h2>
+    <p>Hvis alle fire stemmer, er Kova sannsynligvis rett valg. Hvis ikke, foreslår vi gjerne en konkurrent.</p>
+  </div>
+
+  <div class="dg-card reveal"><div class="dg-num">01</div><div class="dg-body">
+    <h4>Er klinikken norsk?</h4>
+    <p>Kova er bygget for norsk språk, HELFO, norske journalsystemer og norsk arbeidsflyt. Opererer du i Sverige, Danmark eller andre land? Boost.ai eller Intercom passer bedre.</p>
+  </div></div>
+
+  <div class="dg-card reveal"><div class="dg-num">02</div><div class="dg-body">
+    <h4>Er det primært en helseklinikk?</h4>
+    <p>Tannlege, fysio, kiropraktor, psykolog, legekontor — ja. Driver du regnskap, advokat, e-handel eller noe annet? Chatbot Norge eller Intercom passer bedre.</p>
+  </div></div>
+
+  <div class="dg-card reveal"><div class="dg-num">03</div><div class="dg-body">
+    <h4>Har klinikken 1–50 ansatte?</h4>
+    <p>Vår sweet spot. Multi-lokasjon håndteres med Klinikk+-pakken. Er du en sykehuskjede med 500+ ansatte og IT-avdeling? Boost.ai eller Puzzel.</p>
+  </div></div>
+
+  <div class="dg-card reveal"><div class="dg-num">04</div><div class="dg-body">
+    <h4>Vil du ha noe oppe innen få dager?</h4>
+    <p>Kova går live på 24 timer. Har du god tid og foretrekker en konsulent-drevet prosess på 3–6 måneder? Boost.ai.</p>
+  </div></div>
+
+  <div class="dg-conclusion reveal">
+    <h4>4 av 4 ja?</h4>
+    <p>Da er Kova sannsynligvis det rette. <a href="index.html#demo">Bygg en demo</a> — du ser svaret selv på 30 sekunder.</p>
+    <p style="font-size:13px;color:var(--ink-3)">Usikker? Send e-post til <a href="mailto:hallo@kova.no">hallo@kova.no</a> — vi gir ærlig anbefaling, også om det betyr en konkurrent.</p>
+  </div>
+</section>
+
+<section class="when-not">
+  <div class="wn-inner reveal">
+    <div class="wn-title">Når du <em>ikke</em> bør velge Kova</div>
+    <p>Vi kan ikke være best for alle. Her er scenarier hvor du sannsynligvis har bedre av å gå til noen andre — og det sier vi åpent.</p>
+    <ul class="wn-list">
+      <li><strong>Du driver ikke helseklinikk.</strong> Andre bransjer har bedre alternativer (Intercom for SaaS, Chatbot Norge for generelle bedrifter).</li>
+      <li><strong>Du er i enterprise-segmentet.</strong> Sykehus med IT-avdeling og skreddersøm-behov — Boost.ai er mer rustet.</li>
+      <li><strong>Du trenger flere språk enn norsk + engelsk.</strong> Vi støtter foreløpig bare disse to godt. Intercom eller Drift har bedre flerspråks.</li>
+      <li><strong>Du vil ikke flytte deg fra dagens chatbot.</strong> Hvis dagens løsning fungerer — fortsett. Ingen grunn til å bytte for byttets skyld.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="final-cta reveal">
+  <div class="final-cta-inner">
+    <div class="fc-orb fc-orb-1"></div>
+    <div class="fc-orb fc-orb-2"></div>
+    <h2>Pasientene dine<br>venter <em>allerede.</em></h2>
+    <p>Bygg en demo basert på klinikkens nettside på 30 sekunder. Ingen kortopplysninger kreves.</p>
+    <div class="final-cta-actions">
+      <a href="index.html#demo" class="btn btn-primary">
+        <span>Bygg gratis demo</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="kontakt.html" class="btn btn-ghost"><span>Snakk med oss</span></a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="logo-mark"><svg viewBox="0 0 24 24"><path d="M8 6 L8 18 M8 12 L14 6 M8 12 L15 18" stroke="#FAFAF7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+        <div class="logo-text">
+          <div class="logo-name" style="color:#FAFAF7">Kova</div>
+          <div class="logo-by" style="color:rgba(250,250,247,.4)">av Webutviklerne</div>
+        </div>
+      </div>
+      <p class="footer-tagline">AI-resepsjonen spesialbygget for norske klinikker og helseaktører. Fra 490 kr/mnd. Oppe på 24 timer.</p>
+      <p class="footer-byline">Et produkt av Webutviklerne AS<br>Org. 931 999 999 · Hamar, Innlandet</p>
+    </div>
+    <div class="footer-col">
+      <h5>Produkt</h5>
+      <a href="for-klinikker.html">For klinikker</a>
+      <a href="priser.html">Priser</a>
+      <a href="integrasjoner.html">Integrasjoner</a>
+      <a href="sammenligning.html">Sammenligning</a>
+    </div>
+    <div class="footer-col">
+      <h5>Klinikker</h5>
+      <a href="for-klinikker.html#tannlege">Tannklinikker</a>
+      <a href="for-klinikker.html#fysio">Fysio &amp; kiropraktor</a>
+      <a href="for-klinikker.html#psykolog">Psykolog &amp; terapeut</a>
+      <a href="for-klinikker.html#lege">Allmennlege</a>
+    </div>
+    <div class="footer-col">
+      <h5>Selskap</h5>
+      <a href="om-oss.html">Om oss</a>
+      <a href="case-studies.html">Kunder</a>
+      <a href="blogg.html">Innsikt</a>
+      <a href="kontakt.html">Kontakt</a>
+    </div>
+    <div class="footer-col">
+      <h5>Juridisk</h5>
+      <a href="sikkerhet.html">Sikkerhet</a>
+      <a href="sikkerhet.html#dpa">DPA</a>
+      <a href="sikkerhet.html#wcag">WCAG 2.1 AA</a>
+      <a href="sikkerhet.html#subprocessors">Underleverandører</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Webutviklerne AS · Laget i Hamar</div>
+    <div class="footer-badges">
+      <span class="footer-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>GDPR</span>
+      <span class="footer-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/></svg>Data i EU</span>
+      <span class="footer-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>WCAG 2.1 AA</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+const progress = document.getElementById('scrollProgress');
+function onScroll(){
+  const scrolled = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  if (progress) progress.style.width = (scrolled / docHeight * 100) + '%';
+  if (nav) nav.classList.toggle('scrolled', scrolled > 20);
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, {threshold:.15, rootMargin:'0px 0px -80px 0px'});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+document.getElementById('hb')?.addEventListener('click', () => {
+  document.getElementById('mm').classList.toggle('open');
+});
+</script></body></html>
